@@ -4,17 +4,17 @@ include('./config/db.php');
 
 if (isset($_POST['btncreate'])) {
   $name = $_POST['productName'];
+  $brand = $_POST['sltBrand'];
+  $description = $_POST['productDescription'];
   $price = $_POST['productPrice'];
   $old_product = $_POST['productOldPrice'];
   $new_image = $_FILES['productImage']['name'];
   $new_image2 = $_FILES['productImage2']['name'];
-  $description = $_POST['productDescription'];
   $quantity = $_POST['productQuantity'];
-  $brand = $_POST['sltBrand'];
   $date = date('j M, Y');
   $sale = $_POST['productSale'];
   $category = $_POST['sltCategory'];
-    $query = "INSERT INTO product (prd_name, prd_price, prd_price_old, prd_image, prd_image_2, prd_description, prd_quantity, prd_brand, prd_date, prd_sale, prd_cat_id) VALUES ('$name' ,'$price','$old_product' ,'$new_image','$new_image2', '$description', '$quantity','$brand', '$date', '$sale' , '$category')";
+    $query = "INSERT INTO product (prd_name, prd_price, prd_price_old, prd_image,prd_image_2, prd_description, prd_quantity, prd_brand, prd_date, prd_sale, prd_cat_id) VALUES ('$name' ,'$price','$old_product' ,'$new_image','$new_image2', '$description', '$quantity','$brand', '$date', '$sale' , '$category')";
     $result = mysqli_query($conn, $query);
     if(!$result) {
       die("Query Failed.");
@@ -101,11 +101,11 @@ if (isset($_POST['btncreate'])) {
                       <div class="form-add-wrapper">                    
                         <div class="form-group form-add-input-child-4 ">
                             <label class="product__header">Old Price</label>
-                            <input type="text" class="form-control product__input" name="productOldPrice" placeholder="Old Price"/>                      
+                            <input type="text" class="form-control product__input" name="productPrice" placeholder="Old Price"/>                      
                         </div> 
                         <div class="form-group form-add-input-child-4 ">
                             <label class="product__header">New Price</label>
-                            <input type="text" class="form-control product__input" name="productPrice" placeholder=" New Price"/>                      
+                            <input type="text" class="form-control product__input" name="productOldPrice" placeholder=" New Price"/>                      
                         </div>                     
                         <div class="form-group form-add-input-child-4">
                             <label class="product__header">Quantity</label>

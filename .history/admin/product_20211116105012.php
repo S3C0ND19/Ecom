@@ -26,7 +26,7 @@
                                 <th scope="row" class="table-header-value">Image</th>
                                 <th scope="row" class="table-header-value">Product Name</th>
                                 <th scope="row" class="table-header-value">Price Old</th>
-                                <th scope="row" class="table-header-value">Price New</th>
+                                <th scope="row" class="table-header-value price-new">Price</th>
                                 <th scope="row" class="table-header-value">Category</th>
                                 <th scope="row" class="table-header-value">Discount</th>
                                 <th scope="row" class="table-header-value">Date</th>
@@ -46,67 +46,8 @@
                                 <td class="table-value" ><?php echo $row['prd_name']; ?></td>
                                 <td class="table-value price-old" ><?php echo $row['prd_price_old']; ?></td>
                                 <td class="table-value price-new" ><?php echo $row['prd_price']; ?></td>
-                                <td class="table-value">
-                                    <?php
-                                        switch ($row['prd_cat_id'])
-                                        {
-                                            case 1 :
-                                                echo 'Armchairs';
-                                                break;
-                                            case 2:
-                                                echo 'Bath Room';
-                                                break;
-                                            case 3:
-                                                echo 'Dining Chairs';
-                                                break;
-                                            case 4:
-                                                echo 'Dining Tables';
-                                                break;
-                                            case 5 :
-                                                echo 'Lightings';
-                                                break;
-                                               case 1 :
-                                                echo 'Armchairs';
-                                                break;
-                                            case 2:
-                                                echo 'Bath Room';
-                                                break;
-                                            case 3:
-                                                echo 'Dining Chairs';
-                                                break;
-                                            case 4:
-                                                echo 'Dining Tables';
-                                                break;
-                                            case 5 :
-                                                echo 'Lightings';
-                                                break;
-                                            case 6 :
-                                                echo 'Living Room';
-                                                break;
-                                            case 7:
-                                                echo 'Office';
-                                                break;
-                                            case 8:
-                                                echo 'Seating';
-                                                break;
-                                            case 9:
-                                                echo 'Sofas';
-                                                break;
-                                            case 10 :
-                                                echo 'Special';
-                                                break;
-                                            case 11 :
-                                                echo 'Table';
-                                                break; 
-                                            default:
-                                                echo 'Không tìm thấy';
-                                                break;
-                                        }
-                                    
-                                    ?>
-
-                                </td>
-                                <td class="table-value price-new"><?php echo $row['prd_sale']; ?></td>
+                                <td class="table-value"><?php echo $row['prd_category']; ?></td>
+                                <td class="table-value"><?php echo $row['prd_sale']; ?></td>
                                 <td class="table-value"><?php echo $row['prd_date']; ?></td>
                                 <td>
                                     <a style="font-size:1.5rem; margin-right:20px;" href="edit_product.php?id=<?php echo $row['prd_id']?>" class="btn btn-sm ">

@@ -655,19 +655,3 @@ tr {
 .form-add-input-child-4{
     width: 25%;
 }
-.table-value{
-    font-size:1.5rem;
-}
-.table-header-value{
-    font-size:1.5rem; 
-    font-weight:500;
-}
-.price-old{
-    color: var(--secondary-text-color);
-    -webkit-text-decoration-line: line-through; /* Safari */
-    text-decoration-line: line-through; 
-}
-.price-new{ 
-    font-size:1.5rem;
-    color: #ff4545 !important;
-}

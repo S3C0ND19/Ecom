@@ -46,66 +46,7 @@
                                 <td class="table-value" ><?php echo $row['prd_name']; ?></td>
                                 <td class="table-value price-old" ><?php echo $row['prd_price_old']; ?></td>
                                 <td class="table-value price-new" ><?php echo $row['prd_price']; ?></td>
-                                <td class="table-value">
-                                    <?php
-                                        switch ($row['prd_cat_id'])
-                                        {
-                                            case 1 :
-                                                echo 'Armchairs';
-                                                break;
-                                            case 2:
-                                                echo 'Bath Room';
-                                                break;
-                                            case 3:
-                                                echo 'Dining Chairs';
-                                                break;
-                                            case 4:
-                                                echo 'Dining Tables';
-                                                break;
-                                            case 5 :
-                                                echo 'Lightings';
-                                                break;
-                                               case 1 :
-                                                echo 'Armchairs';
-                                                break;
-                                            case 2:
-                                                echo 'Bath Room';
-                                                break;
-                                            case 3:
-                                                echo 'Dining Chairs';
-                                                break;
-                                            case 4:
-                                                echo 'Dining Tables';
-                                                break;
-                                            case 5 :
-                                                echo 'Lightings';
-                                                break;
-                                            case 6 :
-                                                echo 'Living Room';
-                                                break;
-                                            case 7:
-                                                echo 'Office';
-                                                break;
-                                            case 8:
-                                                echo 'Seating';
-                                                break;
-                                            case 9:
-                                                echo 'Sofas';
-                                                break;
-                                            case 10 :
-                                                echo 'Special';
-                                                break;
-                                            case 11 :
-                                                echo 'Table';
-                                                break; 
-                                            default:
-                                                echo 'Không tìm thấy';
-                                                break;
-                                        }
-                                    
-                                    ?>
-
-                                </td>
+                                <td class="table-value"><?php echo $row['prd_category']; ?></td>
                                 <td class="table-value price-new"><?php echo $row['prd_sale']; ?></td>
                                 <td class="table-value"><?php echo $row['prd_date']; ?></td>
                                 <td>

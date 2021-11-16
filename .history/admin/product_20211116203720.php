@@ -51,53 +51,20 @@
                                         switch ($row['prd_cat_id'])
                                         {
                                             case 1 :
-                                                echo 'Armchairs';
+                                                echo 'Số không';
                                                 break;
                                             case 2:
-                                                echo 'Bath Room';
+                                                echo 'Số một';
                                                 break;
                                             case 3:
-                                                echo 'Dining Chairs';
+                                                echo 'Số hai';
                                                 break;
                                             case 4:
-                                                echo 'Dining Tables';
+                                                echo 'Số ba';
                                                 break;
                                             case 5 :
-                                                echo 'Lightings';
+                                                echo 'Số bốn';
                                                 break;
-                                               case 1 :
-                                                echo 'Armchairs';
-                                                break;
-                                            case 2:
-                                                echo 'Bath Room';
-                                                break;
-                                            case 3:
-                                                echo 'Dining Chairs';
-                                                break;
-                                            case 4:
-                                                echo 'Dining Tables';
-                                                break;
-                                            case 5 :
-                                                echo 'Lightings';
-                                                break;
-                                            case 6 :
-                                                echo 'Living Room';
-                                                break;
-                                            case 7:
-                                                echo 'Office';
-                                                break;
-                                            case 8:
-                                                echo 'Seating';
-                                                break;
-                                            case 9:
-                                                echo 'Sofas';
-                                                break;
-                                            case 10 :
-                                                echo 'Special';
-                                                break;
-                                            case 11 :
-                                                echo 'Table';
-                                                break; 
                                             default:
                                                 echo 'Không tìm thấy';
                                                 break;

@@ -104,7 +104,6 @@
     padding-bottom: 10px;
     text-transform: uppercase;
     margin-left: 10px;
-    white-space: nowrap;
     
 }
 .navigation__product-name::after{
@@ -362,7 +361,6 @@
 .category-item__link{
     font-size:1.5rem;
     font-weight: 500;
-    color: #333;
 }
 .category-item__quantity{
     font-size:1.3rem;

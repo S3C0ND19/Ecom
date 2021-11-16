@@ -3,10 +3,98 @@ $navigation = mysqli_query($conn,"SELECT * FROM category  WHERE cat_status='1' O
 $brand = mysqli_query($conn,"SELECT * FROM brand ORDER BY brand_id");
 $product = mysqli_query($conn,"SELECT * FROM product ORDER BY prd_id");
 ?>
-<?php include('includes/header.php'); ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FUNIO | Funio Furniture Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="./assets/css/base.css">
+    <link rel="stylesheet" href="./assets/css/grid.css">
+    <link rel="stylesheet" href="./assets/css/footer.css">
+    <link rel="stylesheet" href="./assets/css/header.css">
+    <link rel="stylesheet" href="./assets/css/shop.css">
+    <link rel="stylesheet" href="./assets/font/fontawesome-free-5.15.4-web/fontawesome-free-5.15.4-web/css/all.min.css">
+    <link rel="stylesheet" href="./assets/font/themify-icons-font/themify-icons/themify-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://www.editorx.com/favicon.ico" type="image/gif" sizes="16x16">
+</head>
+<body>
     <div class="wrapper">
       <!-- Header shop -->
-      <?php include('includes/nav.php'); ?>
+        <header class="header">
+            <div class="header__container">
+              <div class="header__topbar">
+                  <div class="header__topbar-left">
+                      <a href="" class="header__location">
+                          <i class="header__icon ti-location-pin"></i>
+                          <span class="header__text">Store Location</span>
+                      </a>
+                      <a href="" class="header__mail">
+                          <i class="header__icon-mail ti-email"></i>
+                          <span class="header__text">support@funio.com</span>
+                      </a>
+                  </div>
+                <div class="header__topbar-right">
+                      <a href="" class="header__text_gift">Gift Cards</a>
+                      <a href="" class="header__text">FAQs</a>
+                </div>
+              </div>
+              <div class="header__navigation">
+                <div class="header__menu">
+                  <div class="header__logo">
+                    <a href="" class="header__logo-link">
+                      <img src="./assets/img/logo__shop.png" alt="" class="header__logo-img">
+                    </a>
+                  </div>
+                  <div class="header__nav">
+                    <ul class="header__nav-items">
+                      <li class="header__nav-lists">
+                          <a href="./index.html" class="header__nav-link active">HOME</a>                 
+                      </li>
+                      <li class="header__nav-lists">
+                          <a href="./shop_paging.html" class="header__nav-link">SHOP</a>
+                      </li>             
+                      <li class="header__nav-lists">
+                          <a href="" class="header__nav-link">PRODUCT</a>
+                      </li>
+                      <li class="header__nav-lists">
+                          <a href="" class="header__nav-link">BLOG</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="headerr__active">
+                  <ul class="headerr__active-item">
+                    <li class="headerr__active-list">
+                      <a href="#" class="headerr__active-link">
+                        <i class="header__active-icon fas fa-search"></i>
+                      </a>
+                    </li>
+                    <li class="headerr__active-list">
+                      <a href="#" class="headerr__active-link">
+                        <i class=" header__active-icon user-login far fa-user"></i>
+                      </a>
+                    </li>
+                    <li class="headerr__active-list">
+                      <a href="#" class="headerr__active-link">
+                        <i class="header__active-icon far fa-star"></i>
+                      </a>
+                    </li>
+                    <li class="headerr__active-list">
+                      <a href="#" class="headerr__active-link">
+                        <i class="header__active-icon fas fa-shopping-cart"></i>
+                      </a>
+                    </li>
+                  </ul>                 
+                </div>
+              </div>
+            </div>
+        </header>
       <!-- Nav -->
         <div class="navigation">
           <h4 class="navigation__heading">Shop</h4>
@@ -45,8 +133,8 @@ $product = mysqli_query($conn,"SELECT * FROM product ORDER BY prd_id");
                       <ul class="category-list">
                       <?php foreach ($navigation as $key => $value): ?>     
                         <li class="category-item">
-                          <a href="" class="category-item__link category-<?php echo $value['cat_id']; ?>"><?php echo $value['cat_name']; ?></a>
-                          <span  class="category-item__quantity"><?php echo $value['cat_quantity']; ?></span>
+                          <span  href="#" class="category-item__link"><?php echo $value['cat_name']; ?></span>
+                          <span  href="" class="category-item__quantity"><?php echo $value['cat_quantity']; ?></span>
                         </li>
                         <?php  endforeach ?>
                     </ul>
@@ -336,17 +424,15 @@ $product = mysqli_query($conn,"SELECT * FROM product ORDER BY prd_id");
                     </div>                  
                     <div class="grid">
                       <div class="row no-gutters products__rows">
-                      <?php foreach ($product as $key => $value): ?>   
                         <div class="col l-4">
-                          <div class="products-details ">
+                          <div class="products-details">
                             <div class="products-thumb">
                               <div class="products-label">
-                                <div class="products-sale"><?php echo $value['prd_sale']; ?></div>
+                                <div class="products-sale">-10%</div>
                               </div>
                               <div class="products-wrapper__img">
                                 <a href="" class="products-details-link">
-                                  <img src="./admin/upload/<?php echo $value['prd_image']; ?>" alt="" class="products-img" alt="">
-                                  <img src="./admin/upload/<?php echo $value['prd_image_2']; ?>" alt="" class="products-img hidden" alt="">
+                                  <img src="./assets/img/filter-latest1.1.jpg" alt="" class="products-img">
                                 </a>
                               </div>                 
                               <div class="products-button">
@@ -362,14 +448,13 @@ $product = mysqli_query($conn,"SELECT * FROM product ORDER BY prd_id");
                               </div>
                             </div>
                             <div class="products-description">
-                              <a class="products-name"><?php echo $value['prd_name']; ?></a>
-                              <span class="quantity old"><?php echo $value['prd_price_old']; ?></span>
-                              <span class="quantity new"><?php echo $value['prd_price']; ?></span>
+                              <a class="products-name">Alvarado Sideboard</a>
+                              <span class="quantity old">$200.00</span>
+                              <span class="quantity new">$180.00</span>
                             </div>
                           </div>
                         </div>
-                        <?php  endforeach ?>
-                        <!-- <div class="col l-4">
+                        <div class="col l-4">
                           <div class="products-details">
                             <div class="products-thumb">
                               <div class="products-label">
@@ -578,7 +663,7 @@ $product = mysqli_query($conn,"SELECT * FROM product ORDER BY prd_id");
                               <span class="quantity new">$180.00</span>
                             </div>
                           </div>
-                        </div> -->
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -588,7 +673,205 @@ $product = mysqli_query($conn,"SELECT * FROM product ORDER BY prd_id");
           </div>
         </div>
       <!-- Footer -->
-      <?php include('includes/footer.php'); ?>     
+        <div class="footer__wrapper">
+          <div class="social">
+            <div class="social__container">
+              <div class="social__img">
+                <img src="./assets/img/logo_social.png" alt="">
+              </div>
+              <div class="social__btn">
+                <ul class="social__btn-item">
+                  <li class="social__btn-list">
+                    <a href="" class="social_btn-link">
+                      <i class="social__btn-icon ti-twitter-alt"></i>
+                    </a>
+                  </li>
+                  <li class="social__btn-list">
+                    <a href="" class="social_btn-link">
+                      <i class="social__btn-icon ti-instagram"></i>
+                    </a>
+                  </li>
+                  <li class="social__btn-list">
+                    <a href="" class="social_btn-link">
+                      <i class="social__btn-icon ti-facebook"></i>
+                    </a>
+                  </li>
+                  <li class="social__btn-list">
+                    <a href="" class="social_btn-link">
+                      <i class="social__btn-icon ti-youtube"></i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <footer class="footer">
+            <div class="footer__container">
+              <div class="grid">
+                <div class="row">
+                  <div class="col l-3">
+                    <span class="footer__heading">GET HELP</span>
+                    <ul class="footer__container-item">
+                      <li class="footer__container-list">
+                        <a href="" class="footer__container-link">
+                          Contact & FAQ
+                        </a>
+                      </li>
+                      <li class="footer__container-list">
+                        <a href="" class="footer__container-link">
+                          Track Your Order
+                        </a>
+                      </li>
+                      <li class="footer__container-list">
+                        <a href="" class="footer__container-link">
+                          Shipping & Delivery
+                        </a>
+                      </li>
+                      <li class="footer__container-list">
+                        <a href="" class="footer__container-link">
+                          Visit Brisbane Studio
+                        </a>
+                      </li>
+                      <li class="footer__container-list">
+                        <a href="" class="footer__container-link">
+                          Interest Free Finance
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col l-3">
+                    <span class="footer__heading">SERVICES</span>
+                    <ul class="footer__container-item">
+                      <li class="footer__container-list">
+                        <a href="" class="footer__container-link">
+                          Assembly Guides
+                        </a>
+                      </li>
+                      <li class="footer__container-list">
+                        <a href="" class="footer__container-link">
+                          Furniture Packages & Fitouts
+                        </a>
+                      </li>
+                      <li class="footer__container-list">
+                        <a href="" class="footer__container-link">
+                          Trade Programmer
+                        </a>
+                      </li>
+                      <li class="footer__container-list">
+                        <a href="" class="footer__container-link">
+                          Sale
+                        </a>
+                      </li>
+                      <li class="footer__container-list">
+                        <a href="" class="footer__container-link">
+                          New Designs
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col l-3">
+                    <span class="footer__heading">CONNECT</span>
+                    <ul class="footer__container-item">
+                      <li class="footer__container-list">
+                        <a href="" class="footer__container-link">
+                          Twiter
+                        </a>
+                      </li>
+                      <li class="footer__container-list">
+                        <a href="" class="footer__container-link">
+                          Facebook
+                        </a>
+                      </li>
+                      <li class="footer__container-list">
+                        <a href="" class="footer__container-link">
+                          Instagram
+                        </a>
+                      </li>
+                      <li class="footer__container-list">
+                        <a href="" class="footer__container-link">
+                          Pinterest
+                        </a>
+                      </li>
+                      <li class="footer__container-list">
+                        <a href="" class="footer__container-link">
+                          Jobs
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col l-3">
+                    <span class="footer__heading">CATEGORIES</span>
+                    <ul class="footer__container-item">
+                      <li class="footer__container-list">
+                        <a href="" class="footer__container-link">
+                          Armchairs
+                        </a>
+                      </li>
+                      <li class="footer__container-list">
+                        <a href="" class="footer__container-link">
+                          Bath Room
+                        </a>
+                      </li>
+                      <li class="footer__container-list">
+                        <a href="" class="footer__container-link">
+                          Dining Chairs
+                        </a>
+                      </li>
+                      <li class="footer__container-list">
+                        <a href="" class="footer__container-link">
+                          Dining Tables
+                        </a>
+                      </li>
+                      <li class="footer__container-list">
+                        <a href="" class="footer__container-link">
+                          Living Room
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>         
+            </div>
+          </footer>
+          <!-- copyright -->
+          <div class="copyright">
+            <div class="copyright__container">
+              <div class="grid">
+                <div class="row copyright__justify">
+                  <div class="col l-6">
+                    <div class="copyright__security">
+                      <div class="grid">
+                        <div class="row">
+                          <div class="col l-5">
+                            <p class="copyright__copyright">© 2021 Funio Furniture Store</p>
+                          </div>
+                          <div class="col l-7">
+                            <ul class="copyright__item">
+                              <li class="copyright__list">
+                                <a href="" class="copyright__link">PRIVACY</a>
+                              </li>
+                              <li class="copyright__list">
+                                <a href="" class="copyright__link">TERMS</a>
+                              </li>
+                              <li class="copyright__list">
+                                <a href="" class="copyright__link">*PROMO T&CS APPLY (VIEW HERE)</a>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col l-6">
+                    <div class="copyright_pay">
+                      <img src="./assets/img/pay.png" alt="">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>        
     </div>
      <!-- Form Login / Register -->
     <div class="modal js-modal">

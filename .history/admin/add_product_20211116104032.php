@@ -4,17 +4,17 @@ include('./config/db.php');
 
 if (isset($_POST['btncreate'])) {
   $name = $_POST['productName'];
-  $price = $_POST['productPrice'];
+  $brand = $_POST['sltBrand'];
+  $category = $_POST['sltCategory'];
+  $description = $_POST['productDescription'];
   $old_product = $_POST['productOldPrice'];
+  $price = $_POST['productPrice'];
   $new_image = $_FILES['productImage']['name'];
   $new_image2 = $_FILES['productImage2']['name'];
-  $description = $_POST['productDescription'];
   $quantity = $_POST['productQuantity'];
-  $brand = $_POST['sltBrand'];
   $date = date('j M, Y');
   $sale = $_POST['productSale'];
-  $category = $_POST['sltCategory'];
-    $query = "INSERT INTO product (prd_name, prd_price, prd_price_old, prd_image, prd_image_2, prd_description, prd_quantity, prd_brand, prd_date, prd_sale, prd_cat_id) VALUES ('$name' ,'$price','$old_product' ,'$new_image','$new_image2', '$description', '$quantity','$brand', '$date', '$sale' , '$category')";
+    $query = "INSERT INTO product (prd_name, prd_category, prd_price, prd_price_old, prd_image,prd_image_2, prd_description, prd_quantity, prd_brand, prd_date, prd_sale) VALUES ('$name','$category' ,'$price','$old_product' ,'$new_image','$new_image2', '$description', '$quantity','$brand', '$date', '$sale')";
     $result = mysqli_query($conn, $query);
     if(!$result) {
       die("Query Failed.");
@@ -73,7 +73,7 @@ if (isset($_POST['btncreate'])) {
                             <label class="product__header">Category</label>
                             <select class="form-select" id="category-select" name="sltCategory">
                                 <option value="" selected>--Please choose an option--</option>
-                                <!-- <option value="Armchairs">Armchairs</option>
+                                <option value="Armchairs">Armchairs</option>
                                 <option value="Bath Room">Bath Room</option>
                                 <option value="Dining Chairs">Dining Chairs</option>
                                 <option value="Dining Tables">Dining Tables</option>
@@ -83,30 +83,19 @@ if (isset($_POST['btncreate'])) {
                                 <option value="Seating">Seating</option>
                                 <option value="Sofas">Sofas</option>
                                 <option value="Special">Special</option>
-                                <option value="Table">Table</option> -->
-                                <option value="1">Armchairs</option>
-                                <option value="2">Bath Room</option>
-                                <option value="3">Dining Chairs</option>
-                                <option value="4">Dining Tables</option>
-                                <option value="5">Lightings</option>
-                                <option value="6">Living Room</option>
-                                <option value="7">Office</option>
-                                <option value="8">Seating</option>
-                                <option value="9">Sofas</option>
-                                <option value="10">Special</option>
-                                <option value="11">Table</option>
+                                <option value="Table">Table</option>
                             </select>
                         </div>
                       </div>                    
-                      <div class="form-add-wrapper">                    
+                      <div class="form-add-wrapper">
                         <div class="form-group form-add-input-child-4 ">
                             <label class="product__header">Old Price</label>
-                            <input type="text" class="form-control product__input" name="productOldPrice" placeholder="Old Price"/>                      
-                        </div> 
+                            <input type="text" class="form-control product__input" name="productPrice" placeholder="Old Price"/>                      
+                        </div>
                         <div class="form-group form-add-input-child-4 ">
                             <label class="product__header">New Price</label>
-                            <input type="text" class="form-control product__input" name="productPrice" placeholder=" New Price"/>                      
-                        </div>                     
+                            <input type="text" class="form-control product__input" name="productOldPrice" placeholder=" New Price"/>                      
+                        </div>
                         <div class="form-group form-add-input-child-4">
                             <label class="product__header">Quantity</label>
                             <input type="number" class="form-control product__input" name="productQuantity" placeholder="Enter Product Quantity" />
@@ -120,10 +109,6 @@ if (isset($_POST['btncreate'])) {
                           <label class="product__header" for="product__description-input">Product Description</label>
                           <textarea style="height:100px;" type="text" class="form-control product__input" name="productDescription"  id="product__description-input"></textarea>
                       </div>
-                      <!-- <div class="form-group">
-                          <label class="product__header" for="product__description-input">Product Category Id</label> 
-                          <input type="text" class="form-control product__input" name="productCatid"  />
-                      </div> -->
                     </div>
                   </div>
                   <div class="form-add-files">
