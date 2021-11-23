@@ -1,0 +1,12 @@
+.success-container{
+    max-width: 1410px;
+    margin: 0 auto;
+    padding: 50px 0;
+}
+.success-heading{
+    padding-bottom: 50px;
+}
+.success-heading p { 
+    font-size: 3rem;
+    color: #d5d5d5;
+}
