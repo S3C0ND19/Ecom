@@ -1,0 +1,13 @@
+.header-user-login-icon {
+    color: #333;
+}
+.profile-container{
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 50px 0;
+}
+.profile-heading{
+    font-size: 3rem;
+    color: #333;
+    padding-bottom: 30px;
+}

@@ -1,0 +1,104 @@
+.header-user-login-icon {
+    color: #333;
+}
+.profile-container{
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 50px 0;
+}
+.profile-heading{
+    font-size: 2.5rem;
+    color: #333;
+    padding-bottom: 30px;
+    font-weight: 500;
+}
+.edit-profile{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.profile-img{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 30px;
+    margin-left: 20px;
+}
+.profile-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.profile-link{
+    width: 200px;
+    height: 30px;
+    text-align: center;
+    background: orange;
+    color: #fff;
+    line-height: 30px;
+    font-size: 1.5rem;
+    border-radius: 3pt;
+    display: inline-block;
+}
+.profile-link.edit{
+    background: #F98F22;
+}
+.profile-infomarion-item{
+    display: flex;
+    flex-direction: column;
+    gap : 20px 0;
+    margin-bottom: 30px;
+}
+.profile-infomarion-heading{
+    display: block;
+    font-size: 1.7rem;
+    color: #333;
+    font-family: 500;
+    padding-bottom: 10px;
+}
+.profile-infomarion-content{
+    font-size: 1.5rem;
+    color: #333;
+}
+.profile-link.order{ 
+    width: 100%;
+    background-color: #D02B3A;
+
+}
+.profile-link.password{
+    width: 100%;
+    background-color: #0066E8;
+}
+.update-profile-container{
+    padding: 50px 0 ;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.update-profile-wrapper{
+    width: 260px;
+    box-shadow: 0 5px 5px 0 rgb(50 50 50 / 20%);
+    background-color: #fff;
+    padding: 20px;
+}
+.update-profile-modal{
+    margin-bottom: 30px;
+}
+.update-profile-tittle{
+    font-size: 2.5rem;
+    font-weight: 500;
+    color: #333;
+}
+.update-profile-form{
+
+}
+.update-profile-form-group{
+    margin-bottom: 10px;
+}
+.update-profile-form-header{
+    display: block;
+    color: #333;
+    font-size:1.5rem;
+    margin-bottom: 7px;
+    font-weight: 500;
+}
