@@ -1,31 +1,114 @@
-
-<?php include('./config/db.php'); 
-$navigation = mysqli_query($conn,"SELECT * FROM category ORDER BY cat_id DESC LIMIT 5");
-$products = mysqli_query($conn,"SELECT * FROM product ORDER BY prd_id");
+<?php 
+include('./config/db.php'); 
+$navigation = mysqli_query($conn,"SELECT * FROM category  WHERE cat_status='1' ORDER BY cat_id");
 $brand = mysqli_query($conn,"SELECT * FROM brand ORDER BY brand_id");
+$product = mysqli_query($conn,"SELECT * FROM product ORDER BY prd_id LIMIT 5");        
+  if(isset($_POST["add_to_cart"]))  
+ {  
+      if(isset($_SESSION["shopping_cart"]))  
+      {  
+           $item_array_id = array_column($_SESSION["shopping_cart"], "item_id");  
+           if(!in_array($_GET["id"], $item_array_id))  
+           {  
+                $count = count($_SESSION["shopping_cart"]);  
+                $item_array = array(  
+                    'item_id'               =>     $_GET["id"],  
+                    'item_img'          =>     $_POST["hidden_img"],  
+                    'item_name'               =>     $_POST["hidden_name"],  
+                    'item_price'          =>     $_POST["hidden_price"],  
+                );  
+                $_SESSION["shopping_cart"][$count] = $item_array; 
+           }  
+           else  
+           {  
+                echo '<script>alert("Bạn đã thêm sản phẩm này rồi!")</script>';
+                echo '<script>window.location="shop_paging.php"</script>';  
+           }  
+      }  
+      else  
+      {  
+           $item_array = array(  
+                'item_id'               =>     $_GET["id"],
+                'item_img'          =>     $_POST["hidden_img"],  
+                'item_name'               =>     $_POST["hidden_name"],  
+                'item_price'          =>     $_POST["hidden_price"],  
+           );  
+           $_SESSION["shopping_cart"][0] = $item_array;  
+      }  
+ }
+ if(isset($_GET["action"]))  
+ {  
+      if($_GET["action"] == "delete")  
+      {  
+           foreach($_SESSION["shopping_cart"] as $keys => $values)  
+           {  
+                if($values["item_id"] == $_GET["id"])  
+                {  
+                     unset($_SESSION["shopping_cart"][$keys]);
+                }  
+           }  
+      }  
+ }
+ if(isset($_POST["add_to_wishlist"]))  
+ {  
+      if(isset($_SESSION["wishlist"]))  
+      {  
+           $item_array_id = array_column($_SESSION["wishlist"], "item_id");  
+           if(!in_array($_GET["id"], $item_array_id))  
+           {  
+                $count = count($_SESSION["wishlist"]);  
+                $item_array = array(  
+                    'item_id'               =>     $_GET["id"],  
+                    'item_img'          =>     $_POST["hidden_img"],  
+                    'item_name'               =>     $_POST["hidden_name"],  
+                    'item_price'          =>     $_POST["hidden_price"],  
+                );  
+                $_SESSION["wishlist"][$count] = $item_array; 
+           } 
+      }  
+      else  
+      {  
+           $item_array = array(  
+                'item_id'               =>     $_GET["id"],
+                'item_img'          =>     $_POST["hidden_img"],  
+                'item_name'               =>     $_POST["hidden_name"],  
+                'item_price'          =>     $_POST["hidden_price"],  
+           );  
+           $_SESSION["wishlist"][0] = $item_array;  
+      }  
+ }    
+
 ?>
 <?php include('includes/header.php'); ?>
-      <div class="navigation">
+    <div class="wrapper">
+      <!-- Header shop -->
+      <?php include('includes/nav.php'); ?>
+      <!-- Nav -->
+        <div class="navigation">
           <h4 class="navigation__heading">Shop</h4>
           <div class="navigation__path">
             <a href="./index.html" class="navigation__path-home">Home</a>
             <a class="icon__next">&#10095;</a>
             <span class="navigation__path-current">Shop</span>
-          </div>
-          <div class="navigation__product">
-            <?php foreach ($navigation as $key => $value): ?>
-            <div class="navigation__product-wrapper">
-              <a href="" class="navigation__product-link">
-                <!-- <img src="./assets/img/shop__nav/nav-img-1.jpg" alt="" class="navigation__product-img"> -->
-                <img src="./upload/<?php echo $value['cat_image']; ?>" alt="" class="navigation__product-img" alt=""/>     
-              </a>
-              <a href="" class="navigation__product-name"><?php echo $value['cat_description']; ?></a>
+          </div>         
+          <div class="slick-container">
+              <div class="slider variable-width">
+              <?php foreach ($navigation as $key => $value): ?>             
+                  <div class="normal">
+                    <div class="inside navigation__product">
+                      <a href="" class="navigation__product-link">
+                        <img src="./admin/upload/<?php echo $value['cat_image']; ?>" alt="" class="navigation__product-img" alt="">     
+                      </a>
+                      <a href="" class="navigation__product-name"><?php echo $value['cat_name']; ?></a>
+                    </div>
+                  </div>
+              <?php  endforeach ?>
+                </div>
             </div>
-            <?php  endforeach ?>
-          </div>
-      </div>
+        </div>
+        </div>
       <!-- Category -->
-      <div class="container">
+        <div class="container">
           <div class="app__content">
             <div class="grid">
               <div class="row">
@@ -36,50 +119,25 @@ $brand = mysqli_query($conn,"SELECT * FROM brand ORDER BY brand_id");
                         CATEGORIES
                       </h3>
                       <ul class="category-list">
-                        <li class="category-item">
-                          <span  href="#" class="category-item__link">Armchairs</span>
-                          <span  href="" class="category-item__quantity">8</span>
+                      <?php foreach ($navigation as $key => $value): ?> 
+ 
+                        <li class="category-item">                          
+                            <div class="category-item-check">
+                              <input type="checkbox"  class="common_selector category" value="<?php echo $value['cat_id'];?>">
+                              <label class="category-item__link" ><?php echo $value['cat_name'];?></label>
+                            </div>
+                           <span  class="category-item__quantity">
+                           <?php 
+                                $getvalue = $value['cat_id'];                                            
+                                $result=mysqli_query($conn,"SELECT count(prd_cat_id) as total from product
+                                    WHERE prd_cat_id=$getvalue;
+                                ");
+                                $data=mysqli_fetch_assoc($result);
+                                echo $data['total']                          
+                          ?>                                               
+                          </span>                        
                         </li>
-                        <li class="category-item">
-                          <span href="#" class="category-item__link">Bath Room</span>
-                          <span href="" class="category-item__quantity">5</span>
-                        </li>
-                        <li class="category-item">
-                          <span href="#" class="category-item__link">Dining Chairs</span>
-                          <span href="" class="category-item__quantity">9</span>
-                        </li>
-                        <li class="category-item">
-                          <span href="#" class="category-item__link">Dining Tables</span>
-                          <span href="" class="category-item__quantity">13</span>
-                        </li>
-                        <li class="category-item">
-                          <span href="#" class="category-item__link">Lighting</span>
-                          <span href="" class="category-item__quantity">1</span>
-                        </li>
-                        <li class="category-item">
-                          <span href="#" class="category-item__link">Living Room</span>
-                          <span href="" class="category-item__quantity">14</span>
-                        </li>
-                        <li class="category-item">
-                          <span href="#" class="category-item__link">Office</span>
-                          <span href="" class="category-item__quantity">11</span>
-                        </li>
-                        <li class="category-item">
-                          <span href="#" class="category-item__link">Seating</span>
-                          <span href="" class="category-item__quantity">4</span>
-                        </li>
-                        <li class="category-item">
-                          <span href="#" class="category-item__link">Sofas</span>
-                          <span href="" class="category-item__quantity">14</span>
-                        </li>
-                        <li class="category-item">
-                          <span href="#" class="category-item__link">Special</span>
-                          <span href="" class="category-item__quantity">16</span>
-                        </li>
-                        <li class="category-item">
-                          <span href="#" class="category-item__link">Table</span>
-                          <span href="" class="category-item__quantity">11</span>
-                        </li>
+                        <?php  endforeach ?>
                     </ul>
                     </nav>
                     <div class="category-price">
@@ -185,18 +243,16 @@ $brand = mysqli_query($conn,"SELECT * FROM brand ORDER BY brand_id");
                         </li>
                       </ul>
                     </div>
-                    <!-- brand -->
                     <div class="category-brand">
                       <h3 class="category__heading">
                         BRANDS
                       </h3>
                       <ul class="category-brand__items">
-                        <?php foreach ($brand as $key => $value): ?>
-                          <li class="category-brand_list">
-                            <!-- <img src="./assets/img/brand/brand__1.png" alt="" class="category-brand-img"> -->
-                            <img src="./upload/<?php echo $value['brand_img']; ?>" alt="" class="category-brand-img" alt="">     
-                          </li>
-                          <?php  endforeach ?>
+                      <?php foreach ($brand as $key => $value): ?>    
+                        <li class="category-brand_list">
+                          <img src="./admin/upload/<?php echo $value['brand_img']; ?>" alt="" class="category-brand-img" alt="">  
+                        </li>
+                        <?php  endforeach ?>
                       </ul>
                     </div>
                     <div class="category-featured">
@@ -209,52 +265,17 @@ $brand = mysqli_query($conn,"SELECT * FROM brand ORDER BY brand_id");
                             <div class="category-featured__img">
                               <a href="" class="category-featured__link-img">
                                 <img src="./assets/img/cate3.jpg" alt="">
-                                <img src="<?php echo "./upload/" .$row['prd_image'];?>"alt="" />
                               </a>
                             </div>
                             <div class="category-featured__description">
-                              <i class="category-featured__icon fas fa-star"></i>
-                              <i class="category-featured__icon fas fa-star"></i>
-                              <i class="category-featured__icon fas fa-star"></i>
-                              <i class="category-featured__icon fas fa-star"></i>
-                              <i class="category-featured__icon fas fa-star"></i>
+                              <i class="fas fa-star vote-start"></i>
+                              <i class="fas fa-star vote-start"></i>
+                              <i class="fas fa-star vote-start"></i>
+                              <i class="fas fa-star vote-start"></i>
+                              <i class="fas fa-star vote-start"></i>
                               <span class="category-featured__description-name">Cole Lounge Chair</span>
-                              <span class="quantity old">$130.00</span>
-                              <span class="quantity new">$125.00</span>
-                            </div>
-                          </li>
-                          <li class="category-featured__list">
-                            <div class="category-featured__img">
-                              <a href="" class="category-featured__link-img">
-                                <img src="./assets/img/cate3.jpg" alt="">
-                              </a>
-                            </div>
-                            <div class="category-featured__description">
-                              <i class="category-featured__icon fas fa-star"></i>
-                              <i class="category-featured__icon fas fa-star"></i>
-                              <i class="category-featured__icon fas fa-star"></i>
-                              <i class="category-featured__icon fas fa-star"></i>
-                              <i class="category-featured__icon fas fa-star"></i>
-                              <span class="category-featured__description-name">Cole Lounge Chair</span>
-                              <span class="quantity old">$130.00</span>
-                              <span class="quantity new">$125.00</span>
-                            </div>
-                          </li>
-                          <li class="category-featured__list">
-                            <div class="category-featured__img">
-                              <a href="" class="category-featured__link-img">
-                                <img src="./assets/img/cate3.jpg" alt="">
-                              </a>
-                            </div>
-                            <div class="category-featured__description">
-                              <i class="category-featured__icon fas fa-star"></i>
-                              <i class="category-featured__icon fas fa-star"></i>
-                              <i class="category-featured__icon fas fa-star"></i>
-                              <i class="category-featured__icon fas fa-star"></i>
-                              <i class="category-featured__icon fas fa-star"></i>
-                              <span class="category-featured__description-name">Cole Lounge Chair</span>
-                              <span class="quantity old">$130.00</span>
-                              <span class="quantity new">$125.00</span>
+                              <span class="category-price old">$130.00</span>
+                              <span class="category-price new">$125.00</span>
                             </div>
                           </li>
                         </ul>
@@ -369,39 +390,8 @@ $brand = mysqli_query($conn,"SELECT * FROM brand ORDER BY brand_id");
                       </div>
                     </div>                  
                     <div class="grid">
-                      <div class="row no-gutters products__rows">
-                        <?php foreach ($products as $key => $value): ?>
-                        <div class="col l-4">
-                          <div class="products-details">
-                            <div class="products-thumb">
-                              <div class="products-label">
-                                <div class="products-sale"><?php echo $value['prd_sale']; ?></div>
-                              </div>
-                              <div class="products-wrapper__img">
-                                <a href="" class="products-details-link">
-                                  <img src="./upload/<?php echo $value['prd_image']; ?>" alt="" class="products-img" alt="">     
-                                </a>
-                              </div>                 
-                              <div class="products-button">
-                                <a href="" class="products-link">
-                                  <i class="products-icon ti-shopping-cart"></i>
-                                </a>
-                                <a href="" class="products-link">
-                                  <i class="products-icon far fa-star"></i>
-                                </a>
-                                <a href="" class="products-link">
-                                  <i class="products-icon ti-search"></i>
-                                </a>
-                              </div>
-                            </div>
-                            <div class="products-description">
-                              <a class="products-name"><?php echo $value['prd_name']; ?></a>
-                              <span class="quantity old"><?php echo $value['prd_price']; ?></span>
-                              <span class="quantity new"><?php echo $value['prd_price']; ?></span>
-                            </div>
-                          </div>
-                        </div>
-                        <?php  endforeach ?>
+                      <div class="row no-gutters products__rows filter_data">
+
                       </div>
                     </div>
                   </div>
@@ -409,5 +399,17 @@ $brand = mysqli_query($conn,"SELECT * FROM brand ORDER BY brand_id");
               </div>
             </div>
           </div>
-      </div>
-<?php include('includes/footer.php'); ?>
+        </div>
+
+      <!-- Footer -->
+      <?php include('includes/footer.php'); ?>     
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="assets/js/slick.js"></script>
+    <script src="assets/js/cart.js"></script>
+    <script src="assets/js/filter.js"></script>   
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>              
+</body>
+</html>
