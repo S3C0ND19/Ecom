@@ -1,6 +1,17 @@
 <?php
 
 include('config/db.php');
+if (isset($_POST['btnSearch'])) { 
+  $keyword = $_POST['search'];
+  $output = '';
+  $query = ("SELECT * FROM product WHERE prd_name LIKE '%$keyword%' ORDER BY prd_name");  
+  $result_tasks = mysqli_query($conn, $query);
+  while($row = mysqli_fetch_assoc($result_tasks)) { ?>
+        
+
+    <?php }
+}
+
 if (empty($_SESSION["login"])){
   echo '<script>
   let btnadd = document.querySelectorAll(".products-link.add");

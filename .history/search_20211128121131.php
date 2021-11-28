@@ -2,84 +2,7 @@
 include('./config/db.php'); 
 $navigation = mysqli_query($conn,"SELECT * FROM category  WHERE cat_status='1' ORDER BY cat_id");
 $brand = mysqli_query($conn,"SELECT * FROM brand ORDER BY brand_id");
-$product = mysqli_query($conn,"SELECT * FROM product ORDER BY prd_id LIMIT 5");        
-  if(isset($_POST["add_to_cart"]))  
- {  
-      if(isset($_SESSION["shopping_cart"]))  
-      {  
-           $item_array_id = array_column($_SESSION["shopping_cart"], "item_id");  
-           if(!in_array($_GET["id"], $item_array_id))  
-           {  
-                $count = count($_SESSION["shopping_cart"]);  
-                $item_array = array(  
-                    'item_id'               =>     $_GET["id"],  
-                    'item_img'          =>     $_POST["hidden_img"],  
-                    'item_name'               =>     $_POST["hidden_name"],  
-                    'item_price'          =>     $_POST["hidden_price"],
-                    'item_quantity'          =>     $_POST["quantity"]
-                );  
-                $_SESSION["shopping_cart"][$count] = $item_array; 
-           }  
-           else  
-           {  
-                echo '<script>alert("Bạn đã thêm sản phẩm này rồi!")</script>';
-                echo '<script>window.location="shop_paging.php"</script>';  
-           }  
-      }  
-      else  
-      {  
-           $item_array = array(  
-                'item_id'               =>     $_GET["id"],
-                'item_img'          =>     $_POST["hidden_img"],  
-                'item_name'               =>     $_POST["hidden_name"],  
-                'item_price'          =>     $_POST["hidden_price"],  
-                'item_quantity'          =>     $_POST["quantity"]
-           );  
-           $_SESSION["shopping_cart"][0] = $item_array;  
-      }  
- }
- if(isset($_GET["action"]))  
- {  
-      if($_GET["action"] == "delete")  
-      {  
-           foreach($_SESSION["shopping_cart"] as $keys => $values)  
-           {  
-                if($values["item_id"] == $_GET["id"])  
-                {  
-                     unset($_SESSION["shopping_cart"][$keys]);
-                }  
-           }  
-      }  
- }
- if(isset($_POST["add_to_wishlist"]))  
- {  
-      if(isset($_SESSION["wishlist"]))  
-      {  
-           $item_array_id = array_column($_SESSION["wishlist"], "item_id");  
-           if(!in_array($_GET["id"], $item_array_id))  
-           {  
-                $count = count($_SESSION["wishlist"]);  
-                $item_array = array(  
-                    'item_id'               =>     $_GET["id"],  
-                    'item_img'          =>     $_POST["hidden_img"],  
-                    'item_name'               =>     $_POST["hidden_name"],  
-                    'item_price'          =>     $_POST["hidden_price"], 
-                    
-                );  
-                $_SESSION["wishlist"][$count] = $item_array; 
-           } 
-      }  
-      else  
-      {  
-           $item_array = array(  
-                'item_id'               =>     $_GET["id"],
-                'item_img'          =>     $_POST["hidden_img"],  
-                'item_name'               =>     $_POST["hidden_name"],  
-                'item_price'          =>     $_POST["hidden_price"],  
-           );  
-           $_SESSION["wishlist"][0] = $item_array;  
-      }  
- }    
+$product = mysqli_query($conn,"SELECT * FROM product ORDER BY prd_id LIMIT 5");          
 ?>
 <?php include('includes/header.php'); ?>
     <div class="wrapper">
@@ -393,7 +316,75 @@ $product = mysqli_query($conn,"SELECT * FROM product ORDER BY prd_id LIMIT 5");
                       </div>
                     </div>                  
                     <div class="grid">
-                      <div class="row no-gutters products__rows filter_data">                                               
+                      <div class="row no-gutters products__rows filter_data">
+                      <?php
+if(isset($_POST["btnSearch"]))
+{
+ $keyword = $_POST['search'];
+ $query = "SELECT * FROM product WHERE prd_name LIKE '%$keyword%' ORDER BY prd_name";  
+ $statement = $connect->prepare($query);
+ $statement->execute();
+ $result = $statement->fetchAll();
+ $total_row = $statement->rowCount();
+ $output = '';
+ if($total_row > 0)
+ {
+  foreach($result as $row)
+  {
+   $output .= '
+   <div class="col l-4">
+    <form method="post" action="shop_paging.php?action=add&id='. $row['prd_id'] .'" class="form-submit">  
+      <div class="products-details ">
+        <div class="products-thumb">
+          <div class="products-label">
+            <div class="products-sale">'. $row['prd_sale'] .'</div>
+          </div>
+          <div class="products-wrapper__img">
+            <a href="product_details.php?id='. $row['prd_id'] .'" class="products-details-link">      
+              <img src="./admin/upload/'. $row['prd_image'] .'" alt="" class="products-img" alt="">
+              <input type="hidden" name="hidden_img" value="'. $row['prd_image'] .'" />  
+              <img src="./admin/upload/'. $row['prd_image_2'] .'" alt="" class="products-img hidden" alt="">
+            </a>
+          </div>                 
+          <div class="products-button">
+            <a href="" class="checkcartemty products-link add">
+              <button type="submit" class="btnAddProductCart" name="add_to_cart">
+                <i class="products-icon add ti-shopping-cart"></i>
+                <i class="products-icon added fas fa-check"></i>
+              </button>         
+            </a>
+            <a href="" class="products-link">
+                <button type="submit" class="btnAddProductCart" name="add_to_wishlist">
+                  <i class="products-icon star far fa-star"></i>
+                </button> 
+            </a>
+            <a href="" class="products-link">
+              <i class="products-icon ti-search"></i>
+            </a>
+          </div>
+        </div>
+        <div class="products-description">
+          <a class="products-name">'. $row['prd_name'] .'</a>
+          <span class="product-quantity-shop old">$'. $row['prd_price_old'] .'</span>
+          <span class="product-quantity-shop new">$'. $row['prd_price'] .'</span>
+          <input type="hidden" name="quantity" value="1" />  
+          <input type="hidden" name="hidden_name" value="'. $row['prd_name'] .'" />  
+          <input type="hidden" name="hidden_price" value="'. $row['prd_price'] .'" />  
+        </div>
+      </div>
+    </form>
+ </div>
+   ';
+  }
+ }
+ else
+ {
+  $output = '<h3>No Product Found</h3>';
+ }
+ echo $output;
+}
+
+?>                                             
                       </div>
                     </div>
                   </div>
@@ -410,7 +401,6 @@ $product = mysqli_query($conn,"SELECT * FROM product ORDER BY prd_id LIMIT 5");
     <script src="assets/js/slick.js"></script>
     <script src="assets/js/cart.js"></script>
     <script src="assets/js/emtycart.js"></script>
-    <script src="assets/js/filter.js"></script>   
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>              
 </body>

@@ -51,7 +51,8 @@ if(!empty($_SESSION["shopping_cart"])){
                             </li>
                         </ul>
                 </div>
-                <div class="content-form">                  
+                <div class="content-form">
+                   
                         <div class="grid">
                             <div class="row">                               
                                     <div class="col l-8">

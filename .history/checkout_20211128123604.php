@@ -51,7 +51,8 @@ if(!empty($_SESSION["shopping_cart"])){
                             </li>
                         </ul>
                 </div>
-                <div class="content-form">                  
+                <div class="content-form">
+                   
                         <div class="grid">
                             <div class="row">                               
                                     <div class="col l-8">
@@ -105,7 +106,7 @@ if(!empty($_SESSION["shopping_cart"])){
                                                 <input type="hidden" name=total  value="<?php echo  $total; ?>">
                                             </div>
                                             <input type="hidden" name=quantity value="<?php echo  $quantity; ?>">
-                                            <input type="hidden" name=user_id value="<?php echo  $id; ?>">
+                                            <input type="text" name=user_id value="<?php echo  $id; ?>">
                                             <input type="hidden" name=pur_user_id value="<?php echo  $id; ?>">
                                             <div class="checkout-cart">
                                                 <input type="submit" name="btncreate" class="btn-create checkout-link" value="PLACE ORDER">

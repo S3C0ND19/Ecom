@@ -47,14 +47,51 @@
                                 <span>CLOSE
                                   <i class="fas fa-times"></i>
                                 </span>
-                              </div>                             
+                              </div>
+                              
                             </div>
-                            <form method="post" action="search.php" class="search-box-content">
+                            <form method="post" action="fetch_data.php" class="search-box-content">
                               <input class="search-input" type="text" name="search" id="" placeholder="Search....">
                               <button  type="submit" class="search-btn-submit" name="btnSearch">
                                 <i class="fas fa-search"></i>
                               </button>
                             </form>
+                            <div class="products-details ">
+        <div class="products-thumb">
+          <div class="products-label">
+            <div class="products-sale"></div>
+          </div>
+          <div class="products-wrapper__img">
+            <a href="product_details.php?id='. $row['prd_id'] .'" class="products-details-link">      
+              <!-- <img src="./admin/upload/'. $row['prd_image'] .'" alt="" class="products-img" alt="">
+              <img src="./admin/upload/'. $row['prd_image_2'] .'" alt="" class="products-img hidden" alt=""> -->
+              <img src="./assets/img/cate1.png" alt="" class="products-img" alt="">
+              <img src="./admin/upload/cate2.jpg. $row['prd_image_2'] .'" alt="" class="products-img hidden" alt="">
+            </a>
+          </div>                 
+          <div class="products-button">
+            <a href="" class="checkcartemty products-link add">
+              <button type="submit" class="btnAddProductCart" name="add_to_cart">
+                <i class="products-icon add ti-shopping-cart"></i>
+                <i class="products-icon added fas fa-check"></i>
+              </button>         
+            </a>
+            <a href="" class="products-link">
+                <button type="submit" class="btnAddProductCart" name="add_to_wishlist">
+                  <i class="products-icon star far fa-star"></i>
+                </button> 
+            </a>
+            <a href="" class="products-link">
+              <i class="products-icon ti-search"></i>
+            </a>
+          </div>
+        </div>
+        <div class="products-description">
+          <a class="products-name"></a>
+          <span class="product-quantity-shop old">$10</span>
+          <span class="product-quantity-shop new">$20</span>
+        </div>
+      </div>
                           </div>
                         </div>
                       </a>

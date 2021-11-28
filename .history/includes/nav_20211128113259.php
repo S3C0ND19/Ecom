@@ -47,14 +47,22 @@
                                 <span>CLOSE
                                   <i class="fas fa-times"></i>
                                 </span>
-                              </div>                             
+                              </div>
+                              
                             </div>
-                            <form method="post" action="search.php" class="search-box-content">
+                            <form method="post" action="fetch_data.php" class="search-box-content">
                               <input class="search-input" type="text" name="search" id="" placeholder="Search....">
                               <button  type="submit" class="search-btn-submit" name="btnSearch">
                                 <i class="fas fa-search"></i>
                               </button>
                             </form>
+                            <ul class="list-search-item">
+                                <li class="list-search-list">
+                                  <a href="">
+                                    <img src="./assets/img/cate1.png" alt="">
+                                  </a>
+                                </li>
+                              </ul>
                           </div>
                         </div>
                       </a>

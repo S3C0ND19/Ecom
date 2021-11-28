@@ -14,17 +14,17 @@
         $note = $_POST['note'];
         $date = date('j M, Y');
         $status = 0;
-        $user_id =$_POST['user_id']; 
+        $user_id =$_POST['pur_user_id']; 
+        $query = "INSERT INTO purchase (purchase_user_id,firstname,lastname,address,city,postcode,email,phone,quantity,total,note,date) 
+        VALUES ('$purchase_user_id','$firstname','$lastname','$address','$city','$postcode','$email','$phone','$quantity','$total','$note','$date')";
+        $result = mysqli_query($conn, $query);
         if(!empty($_SESSION["shopping_cart"])){
             foreach($_SESSION["shopping_cart"] as $keys => $values){
                 $resultid=$values["item_id"];
-                $query2 = "INSERT INTO order_prd_id (user_id,product_id) VALUES ('$user_id','$resultid')";
+                $query2 = "INSERT INTO order_prd_id (user_id,product_id,order_status) VALUES ('$user_id','$resultid','$status')";
                 $result2 = mysqli_query($conn, $query2);
             }
-        }
-        $query = "INSERT INTO purchase (purchase_user_id,firstname,lastname,address,city,postcode,email,phone,quantity,total,note,date) 
-        VALUES ('$purchase_user_id','$firstname','$lastname','$address','$city','$postcode','$email','$phone','$quantity','$total','$note','$date')";
-        $result = mysqli_query($conn, $query);      
+        } 
         if(!$result && !$result2) {
             die("Query Failed.");
         }else {

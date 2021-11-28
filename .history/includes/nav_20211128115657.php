@@ -49,7 +49,7 @@
                                 </span>
                               </div>                             
                             </div>
-                            <form method="post" action="search.php" class="search-box-content">
+                            <form method="post" action="shop_paging.php" class="search-box-content">
                               <input class="search-input" type="text" name="search" id="" placeholder="Search....">
                               <button  type="submit" class="search-btn-submit" name="btnSearch">
                                 <i class="fas fa-search"></i>

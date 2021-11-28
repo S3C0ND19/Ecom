@@ -1,6 +1,7 @@
 <?php
 
 include('config/db.php');
+
 if (empty($_SESSION["login"])){
   echo '<script>
   let btnadd = document.querySelectorAll(".products-link.add");
