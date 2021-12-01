@@ -1,0 +1,75 @@
+.myorder-container{
+    max-width: 815px;
+    margin: 0 auto;
+    padding: 50px 0;
+}
+.myorder-heading{
+    font-size: 3rem;
+    font-weight: 500;
+    padding-bottom: 30px;
+}
+.table-order{
+    border: 1px solid rgba(49, 49, 49, 0.089);
+}
+/* .table-order thead {
+    border-bottom: 1px solid rgba(49, 49, 49, 0.089);
+} */
+tr {
+    border-bottom: 1px solid rgba(49, 49, 49, 0.089);
+}
+.table-order-id{
+    width: 40%;
+    font-size: 1.4rem;
+    font-weight: 500;
+    padding: 20px;
+    text-align: left;
+    border-right: 1px solid rgba(49, 49, 49, 0.089);
+}
+.table-order-items{
+    width: 20%;
+    font-size: 1.4rem;
+    font-weight: 500;
+    padding: 20px;
+    text-align: left;
+    border-right: 1px solid rgba(49, 49, 49, 0.089);
+}
+.table-order-amount{
+    width: 20%;
+    font-size: 1.4rem;
+    font-weight: 500;
+    padding: 20px;
+    text-align: left;
+    border-right: 1px solid rgba(49, 49, 49, 0.089);
+}
+.table-order-status{
+    width: 20%;
+    font-size: 1.4rem;
+    font-weight: 500;
+    padding: 20px;
+    text-align: left;
+    border-right: 1px solid rgba(49, 49, 49, 0.089);
+}
+.table-order-status.process{
+    color: redl;
+}
+.table-order-action{
+    width: 20%;
+    font-size: 1.4rem;
+    font-weight: 500;
+    padding: 20px;
+    text-align: left;
+    border-right: 1px solid rgba(49, 49, 49, 0.089);
+}
+.table-order-action div{
+    background-color: blue;
+    color: #333;
+    border-radius: 2pt;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    line-height: 35px;
+    cursor: pointer;
+}
+.table-order-action div i {
+    color: #fff;
+}

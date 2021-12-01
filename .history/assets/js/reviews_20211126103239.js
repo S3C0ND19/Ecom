@@ -1,1 +1,0 @@
-let getBtnSubmit = document.querySelector('.input-reviews-submit');
