@@ -1,25 +1,27 @@
 <?php
 session_start();
+{
+ 
 $total_price = 0;
 $item_details = '';
 $order_details = '
 <table class="content__cart-table">
-  <thead>
-      <tr>
-          <th class="product-thumbnail">PRODUCT</th>
-          <th class="product-price">PRICE</th>
-          <th class="product-quantity">QUANTITY</th>
-          <th class="product-subtotal">SUBTOTAL</th>
-          <th class="product-remove">&nbsp;</th>
-      </tr>
-  </thead>                                    
+<thead>
+<tr>
+<th class="product-thumbnail">PRODUCT</th>
+<th class="product-price">PRICE</th>
+<th class="product-subtotal">SUBTOTAL</th>
+<th class="product-remove">&nbsp;</th>
+</tr>
+</thead>                                    
 ';
 if(!empty($_SESSION["shopping_cart"]))
 {
   $total = 0;
- foreach($_SESSION["shopping_cart"] as $keys => $values)
- {
-  $order_details .= '
+  foreach($_SESSION["shopping_cart"] as $keys => $values)
+
+    $order_details .= '
+    <form method="post">
   <tr class="content__cart-items">                                               
       <td class="product-thumbnail table-middle">
           <a href="" class="content__cart-link-img">
@@ -32,25 +34,15 @@ if(!empty($_SESSION["shopping_cart"]))
       <td class="product-price table-middle">
         <span class="product-price__value">'.$values["item_price"].'$</span>
       </td>
-      <td class="product-quantity table-middle">
-        <div class="quantity">
-            <button type="submit" class="plus" name="plus" value="+">+</button>
-            <input type="text" size="4" class="input-number" title="Qty" value="'.$values["item_quantity"].'" name="" max="29" min="0" step="1" >
-            <button type="submit" class="minus" name="minus" value="-">-</button>
-        </div>
-      </td>
       <td class="product-subtotal table-middle">
-          <span class="product-subtotal__value">'.number_format(floatval($values["item_price"]), 2).'$ </span>
+          <span class="product-subtotal__value">'.floatval($values["item_quantity"]) * floatval($values["item_price"]).'$ </span>
       </td>
       <td class="product-remove table-middle">
           <a href="cart.php?action=delete&id='.$values["item_id"].'" class="product-remove__item">x</a>
       </td>
   </tr>
   ';
-  $total_price = $total_price + (floatval($values["item_price"]));
-  $total = $total + ($values["item_quantity"] * $values["item_price"]);  
-  // $total = $total + floatval($values["item_price"]);
-  $item_details .= $values["item_name"] . ', ';
+
  }
   $item_details = substr($item_details, 0, -2);
 }
@@ -65,11 +57,13 @@ $order_details .= '
               <div class="content__continue">
                   <a href="shop_paging.php" class="content__continue-link">Continue Shopping</a>
               </div>
-              <button type="submit" class="btn-submit__update">UPDATE CART</button>
+              <button type="submit" name="update" class="btn-submit__update">UPDATE CART</button>
           </div>
       </td>
   </tr>
-</table>';
+</table>
+</form>
+';
 if(isset($_GET["action"]))  
 {  
      if($_GET["action"] == "delete")  
@@ -84,7 +78,8 @@ if(isset($_GET["action"]))
           }  
      }  
 } 
-?>
+?> 
+
 <?php include('includes/header.php'); ?>
     <div class="wrapper">
         <!-- header -->
