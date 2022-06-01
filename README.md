@@ -21,6 +21,6 @@
 - Sort posts by views or votes
 - Add to cart and checkout
 - View orders
-- 
+
 ## **Video Demo 🚀**
 https://www.youtube.com/watch?v=g0fVKR5SqMY&t=409s&ab_channel=14mH4u
