@@ -1,10 +1,11 @@
-<h1 align='center'><strong>Ecommerce Website⚡</strong></h1>
+<h1 align='center'><strong>FUNIO⚡</strong></h1>
 <p>Ecommerce with PHP</p>
 
 ## **Main technologies 📝**
 - PHP
 - AJAX
 - MySQL
+- JQuery
 
 ## **Features 🚀**
 - Authentication
